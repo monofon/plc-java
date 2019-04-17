@@ -43,12 +43,13 @@ class DynamicBinding {
 // 8< variable-shadowing
 class Shadowing {
     String name = "McCoy";
-
     void who() {
+        System.out.println(name);
         String name = "Kirk";
         System.out.println(name);
     }
 }
+// >8
 
 class LambdaStreams {
     void m() {
