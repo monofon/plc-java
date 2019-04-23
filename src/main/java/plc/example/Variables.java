@@ -78,20 +78,56 @@ class Vec3 {
         z += v.z;
         return this; // Allow method chaining
     }
+// >8
 
     @Override
     public String toString() {
         return "(" + x + " " + y + " " + z + ")";
     }
 }
-// >8
 
 // 8<| vec3-test
 class Vec3Test {
     static void run() {
         Vec3 a = new Vec3(0, 1, 0);
         Vec3 b = new Vec3(1, 0, 0);
-        System.out.println(a.add(b));
-        System.out.println(a.add(b));
+        Vec3 c = a.add(b);
+        Vec3 d = c.add(a);
+        System.out.println(c);
+        System.out.println(d);
     }
 }
+
+// 8< vec3_
+class Vec3_ {
+    final double x, y, z;
+
+    Vec3_(double x, double y, double z) {
+        this.x = x;
+        this.y = y;
+        this.z = z;
+    }
+
+    Vec3_ add(Vec3_ v) {
+        return new Vec3_(x + v.x, y + v.y, z + v.z);
+    }
+// >8
+
+    @Override
+    public String toString() {
+        return "(" + x + " " + y + " " + z + ")";
+    }
+}
+
+// 8<| vec3_-test
+class Vec3_Test {
+    static void run() {
+        Vec3_ a = new Vec3_(0, 1, 0);
+        Vec3_ b = new Vec3_(1, 0, 0);
+        Vec3_ c = a.add(b);
+        Vec3_ d = c.add(a);
+        System.out.println(c);
+        System.out.println(d);
+    }
+}
+
