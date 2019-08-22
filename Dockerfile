@@ -33,10 +33,11 @@ RUN adduser --disabled-password \
 COPY . $HOME
 RUN chown -R $NB_UID $HOME
 
+WORKDIR $HOME
+
 USER $NB_USER
 
-ENV JUPYTER_CONFIG_DIR=$HOME/jupyter
+ENV JUPYTER_CONFIG_DIR=jupyter
 
 # Launch the notebook server
-WORKDIR $HOME
 CMD ["jupyter", "notebook", "--ip", "0.0.0.0"]
