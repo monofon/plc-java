@@ -35,6 +35,8 @@ RUN chown -R $NB_UID $HOME
 
 USER $NB_USER
 
+ENV JUPYTER_CONFIG_DIR=$HOME/jupyter
+
 # Launch the notebook server
 WORKDIR $HOME
 CMD ["jupyter", "notebook", "--ip", "0.0.0.0"]

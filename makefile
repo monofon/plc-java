@@ -13,8 +13,11 @@ compile: make/allsource.txt
 clean:
 	rm -r $(bin-dir)
 
-# Start a notebook server that can serve to iframes
+# Start a local notebook server that can serve to iframes. It uses the
+# configuration from ./jupyter.
 jupyter: 
-	jupyter notebook --NotebookApp.tornado_settings='{"headers":{"Content-Security-Policy":"frame-ancestors self http://localhost:8888; report-uri /api/security/csp-report" }}' --port 9999 notebook/vec3-example.ipynb
+	env JUPYTER_CONFIG_DIR=jupyter \
+	jupyter notebook \
+		--NotebookApp.port=8192
 
-.PHONY: clean compile run-template install
+.PHONY: clean compile run-template install jupyter
