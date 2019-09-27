@@ -13,13 +13,19 @@ compile: make/allsource.txt
 clean:
 	rm -r $(bin-dir)
 
-# Start a local notebook server that can serve to iframes. It uses the
-# configuration from ./jupyter.
+# Start a local notebook server that can serve to iframes. For that, it uses the
+# following configuration from ./jupyter:
+#	c.NotebookApp.tornado_settings = {
+#		'headers': {
+#			'Content-Security-Policy': 
+#				"frame-ancestors tramberend.beuth-hochschule.de localhost:* http: https: 'self';"
+#			}
+#		}
 jupyter: 
 	env JUPYTER_CONFIG_DIR=jupyter \
-	jupyter notebook \
-		--NotebookApp.port=8192 \
-		--NotebookApp.token=plc
+	jupyter notebook --port 8192 \
+		--NotebookApp.allow_origin='http://localhost:8888' \
+		--NotebookApp.token='plc'
 
 # Build the plc-java docker image.
 docker-build:
